@@ -8,14 +8,14 @@ Daniel Ware <waredanielb@gmail.com>
 
 ## Technologies Used
 
-React, Javascript, CSS
+React, Javascript, CSS, node
 
 ## Application Setup
 
 1. Clone repository to your desktop. 
 2. Navigate to 'inventory-tracker' folder directory
-3. Run npx create-react-app
-4. Run npm run build
+3. Run npm install
+4. Run npm run start
 5. Navigate to http://localhost:3000 in web browser
 
 ## Known Bugs
