@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 
 
 const SoupList = (props) => {
-  console.log(props);
     return (
       <React.Fragment>
           {props.soupList.map((soup) => (
