@@ -50,22 +50,33 @@ class SoupControl extends React.Component {
     });
   }
 
+  // handleDecrementStock = (id) => {
+  //   const sale = this.state.mainSoupList.map((soup) => {
+  //     console.log(id, soup.id);
+  //     if (soup.id === id) {
+  //       if (soup.stock > 0) {
+  //         return {
+  //           ...soup,
+  //           stock: soup.stock - 1,
+  //         };
+  //       } else {
+  //         return {soup};
+  //       }
+  //     }
+  //   });
+  //   this.setState({ mainSoupList: sale });
+  // };
+  
   handleDecrementStock = (id) => {
-    const sale = this.state.mainSoupList.map((soup) => {
-      console.log(id, soup.id);
-      if (soup.id === id) {
-        if (soup.stock > 0) {
-          return {
-            ...soup,
-            stock: soup.stock - 1,
-          };
-        } else {
-          return {soup};
-        }
-      }
-    });
-    this.setState({ mainSoupList: sale });
-  };
+    const sale = this.state.mainSoupList.find(soup => soup.id === id);
+    if(sale.stock > 0){
+      const updatedSale = {...sale, stock: sale.stock - 1}
+      const updatedMainSoupList = this.state.mainSoupList
+      .filter(soup => soup.id !== id)
+      .concat(updatedSale);
+      this.setState({mainSoupList: updatedMainSoupList})
+    }
+  }
 
   render() {
     let currentlyVisibleState = null;
@@ -79,7 +90,7 @@ class SoupControl extends React.Component {
       currentlyVisibleState = <NewSoupForm onNewSoupCreation={this.handleAddingNewSoupToList} />
       buttonText = "Return to Soup Menu";
     } else {
-      currentlyVisibleState = <SoupList soupList={this.state.mainSoupList} onSoupSelection={this.handleChangingSelectedSoup} onClick={this.handleDecrementStock}/>;
+      currentlyVisibleState = <SoupList soupList={this.state.mainSoupList} onSoupSelection={this.handleChangingSelectedSoup} onSellClick={this.handleDecrementStock}/>;
       buttonText = "Add New Soup";
     }
 
